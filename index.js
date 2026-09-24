@@ -48,8 +48,7 @@ app.post('/api/studyLogs/create', verifyUser, async (req, res) => {
 })
 app.patch('/api/studyLogs/:logId', verifyUser, async (req, res) => {
     const { logId } = req.params
-    console.log(req.body)
-    const updataedLogs = await studyLogs.findOneAndUpdate({_id: logId, userId: req.user._id}, req.body, {new: true, runValidators: true})
+    const updataedLogs = await studyLogs.findOneAndUpdate({_id: logId, userId: req.user._id}, req.body, {returnDocument: 'after', runValidators: true})
     res.json(updataedLogs)
 })
 app.use((err, req, res, next) => {
